@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Tracker</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/index.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Pizza Tracker</h1>
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="container">
+        <form id="dataForm">
+            <label for="name">Name:</label>
+            <select name="name" id="name" required>
+                <option value="" disabled selected>Wähle deinen Namen</option>
+                <option value="Schasch">Mani</option>
+                <option value="Schasch">Schasch</option>
+            </select>
+
+            <label for="apikey">API Key:</label>
+            <input type="password" name="apikey" id="apikey" placeholder="API key hier eingeben..." required>
+        
+            <label for="variety">Sorte:</label>
+            <input type="text" name="variety" id="variety" placeholder="Pizzasorte hier eingeben..." required>
+        
+            <label for="source">Beschaffung:</label>
+            <select name="source" id="source" required>
+                <option value="" disabled selected>Woher kommt die Pizza</option>
+                <option value="tk">Tiefgekühlt</option>
+                <option value="o">Bestellt</option>
+                <option value="diy">Selbstgemacht</option>
+                <option value="r">Restaurant</option>
+            </select>
+        
+            <label for="date">Datum:</label>
+            <input type="date" id="date" name="date" required lang="de">
+
+        
+            <button type="submit">Absenden</button>
+        </form>
+    </div>
+</body>
+</html>
