@@ -9,3 +9,10 @@ CREATE TABLE pizza_stats (
     type TEXT
 );
 EOF
+
+sqlite3 $DB_NAME <<EOF
+CREATE TABLE users (
+    name TEXT PRIMARY KEY,
+    api_key TEXT NOT NULL
+);
+EOF
