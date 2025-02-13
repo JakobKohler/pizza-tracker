@@ -6,7 +6,7 @@ const sqlite3 = require("sqlite3");
 const dbx = require("./utils/dbUtils.js");
 const extractAPIKey = require("./utils/apiUtils.js");
 const bodyParser = require("body-parser");
-const cors = require('cors')
+const cors = require("cors");
 
 app.use(bodyParser.json());
 app.use(
@@ -17,25 +17,27 @@ app.use(
 
 app.use(cors());
 
-app.use(express.json({
+app.use(
+  express.json({
     strict: true,
-    type: 'application/json',
+    type: "application/json",
     verify: (req, res, buf, encoding) => {
-        if (buf && buf.length) {
-            try {
-                JSON.parse(buf.toString());
-            } catch (err) {
-                throw new SyntaxError('Invalid JSON format');
-            }
+      if (buf && buf.length) {
+        try {
+          JSON.parse(buf.toString());
+        } catch (err) {
+          throw new SyntaxError("Invalid JSON format");
         }
-    }
-}));
+      }
+    },
+  })
+);
 
 app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError) {
-        return res.status(400).json({ error: 'Invalid JSON format' });
-    }
-    next(err);
+  if (err instanceof SyntaxError) {
+    return res.status(400).json({ error: "Invalid JSON format" });
+  }
+  next(err);
 });
 
 const db = new sqlite3.Database("db/pizza_stats.db", sqlite3.OPEN_READWRITE);
