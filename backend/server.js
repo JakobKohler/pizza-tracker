@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const endpoints = require("./routes.js");
 const sqlite3 = require("sqlite3");
 const dbx = require("./utils/dbUtils.js");

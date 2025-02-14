@@ -1,8 +1,8 @@
-.schaschColor{
+.schaschColor {
   color: rgba(255, 99, 132, 1);
 }
 
-.maniColor{
+.maniColor {
   color: rgba(54, 162, 235, 1);
 }
 
@@ -28,17 +28,17 @@ body {
   align-items: center;
 }
 
-.bigNumberDisplay{
+.bigNumberDisplay {
   width: 80%;
   text-align: center;
   margin: 50px 10px;
 }
 
-.bigNumberDisplay span{
+.bigNumberDisplay span {
   font-weight: bolder;
 }
 
-.bigNum{
+.bigNum {
   font-weight: bolder;
   font-size: 4rem;
   margin: 2rem auto;
@@ -58,13 +58,13 @@ canvas {
 
 form {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
   margin-top: 20px;
 }
 
 label {
-  margin-bottom: 5px; /* Space between label and input */
-  font-weight: bold; /* Make labels bold */
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 input[type="text"],
