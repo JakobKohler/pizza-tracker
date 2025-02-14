@@ -134,7 +134,7 @@ async function checkAPIKey(db, key, name = "") {
     if (name) {
       namesQuery =
         'SELECT api_key FROM users WHERE name = ? OR name = "master"';
-      queryParams.push(name);
+      queryParams.push(name.toLowerCase());
     } else {
       namesQuery = "SELECT api_key FROM users";
     }

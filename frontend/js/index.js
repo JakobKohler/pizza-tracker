@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config.js";
+
 const ctx = document.getElementById("lineChartMain").getContext("2d");
 const ctxPie1 = document.getElementById("pieChart1").getContext("2d");
 const ctxPie2 = document.getElementById("pieChart2").getContext("2d");
@@ -38,7 +40,7 @@ const pizzaInfo = (tooltipItem) => {
   const dataPoint = tooltipItem.raw;
   let tooltipText = '';
   if(dataPoint.pizzaList.length > 1){
-    ids = dataPoint.pizzaList.map(entry => entry.id)
+    let ids = dataPoint.pizzaList.map(entry => entry.id)
     tooltipText = `IDs: ${ids.join(', ')}, Mehrere Pizzas`
   }else if(dataPoint.pizzaList.length <= 0){
     tooltipText = `Keine Pizza`
@@ -194,10 +196,10 @@ function adjustDOM(schaschData, maniData){
 async function fetchData() {
   try {
     let response = await fetch(
-      "/rest/api/v1/pizzaStats/schasch"
+      `${API_BASE_URL}/api/v1/pizzaStats/schasch`
     );
     const schaschData = await response.json();
-    response = await fetch("/rest/api/v1/pizzaStats/mani");
+    response = await fetch(`${API_BASE_URL}/api/v1/pizzaStats/mani`);
     const maniData = await response.json();
 
     createLineChart(schaschData, maniData);

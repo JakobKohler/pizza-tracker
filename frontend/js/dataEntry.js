@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config.js";
+
 document
   .getElementById("pizzaForm")
   .addEventListener("submit", function (event) {
@@ -13,7 +15,7 @@ document
 
     const apiKey = formData.get("apikey");
 
-    fetch("/rest/api/v1/pizzaStats", {
+    fetch(`${API_BASE_URL}/api/v1/pizzaStats`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +47,7 @@ document
     const idToDel = formData.get("entryID");
     const apiKey = formData.get("apikey");
 
-    fetch(`/rest/api/v1/pizzaStats/${idToDel}`, {
+    fetch(`${API_BASE_URL}/api/v1/pizzaStats/${idToDel}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
