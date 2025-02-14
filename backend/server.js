@@ -54,7 +54,7 @@ app.get("/rest/api/v1/pizzaStats", async (req, res) => {
   res.json(allPizzaEntries);
 });
 
-app.get("rest/api/v1/pizzaStats/:user", async (req, res) => {
+app.get("/rest/api/v1/pizzaStats/:user", async (req, res) => {
   const requestedName = req.params["user"];
   dbx
     .fetchPizzaEntriesByName(db, requestedName)
