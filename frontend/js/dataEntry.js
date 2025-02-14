@@ -13,7 +13,7 @@ document
 
     const apiKey = formData.get("apikey");
 
-    fetch("http://localhost:3000/api/v1/pizzaStats", {
+    fetch("/rest/api/v1/pizzaStats", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ document
     const idToDel = formData.get("entryID");
     const apiKey = formData.get("apikey");
 
-    fetch(`http://localhost:3000/api/v1/pizzaStats/${idToDel}`, {
+    fetch(`/rest/api/v1/pizzaStats/${idToDel}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
