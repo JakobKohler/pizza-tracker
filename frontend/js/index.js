@@ -194,10 +194,10 @@ function adjustDOM(schaschData, maniData){
 async function fetchData() {
   try {
     let response = await fetch(
-      "http://localhost:3000/api/v1/pizzaStats/schasch"
+      "/rest/api/v1/pizzaStats/schasch"
     );
     const schaschData = await response.json();
-    response = await fetch("http://localhost:3000/api/v1/pizzaStats/mani");
+    response = await fetch("/rest/api/v1/pizzaStats/mani");
     const maniData = await response.json();
 
     createLineChart(schaschData, maniData);
