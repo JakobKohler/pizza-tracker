@@ -42,14 +42,14 @@ app.use((err, req, res, next) => {
 
 const db = new sqlite3.Database("db/pizza_stats.db", sqlite3.OPEN_READWRITE);
 
-app.get("/api/v1", (req, res) => {
+app.get("/rest/api/v1", (req, res) => {
   res.json({
     apiVersion: "1.0",
     endpoints: endpoints,
   });
 });
 
-app.get("/api/v1/pizzaStats", async (req, res) => {
+app.get("/rest/api/v1/pizzaStats", async (req, res) => {
   const allPizzaEntries = await dbx.fetchAllPizzaEntries(db);
   res.json(allPizzaEntries);
 });
