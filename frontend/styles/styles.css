@@ -1,9 +1,12 @@
 .schaschColor {
   color: rgba(255, 99, 132, 1);
+  font-weight: bolder;
+
 }
 
 .maniColor {
   color: rgba(54, 162, 235, 1);
+  font-weight: bolder;
 }
 
 body {
@@ -32,10 +35,6 @@ body {
   width: 80%;
   text-align: center;
   margin: 50px 10px;
-}
-
-.bigNumberDisplay span {
-  font-weight: bolder;
 }
 
 .bigNum {

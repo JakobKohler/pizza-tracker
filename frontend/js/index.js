@@ -186,11 +186,16 @@ function adjustDOM(schaschData, maniData){
   const schaschTimeField = document.getElementById("schaschTime");
   const maniTimeField = document.getElementById("maniTime");
 
+  function getText(n){
+    const text = n > 1 || n <= 0 ? `<b>${n}</b> Tagen`:`<b>${n}</b> Tag`;
+    return text;
+  }
+
   schaschCountField.innerText = schaschData.length;
   maniCountField.innerText = maniData.length;
 
-  schaschTimeField.innerText = getDiffToToday(schaschData);
-  maniTimeField.innerText = getDiffToToday(maniData);
+  schaschTimeField.innerHTML = getText(getDiffToToday(schaschData));
+  maniTimeField.innerHTML = getText(getDiffToToday(maniData));
 }
 
 async function fetchData() {
