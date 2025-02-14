@@ -54,7 +54,7 @@ app.get("/rest/api/v1/pizzaStats", async (req, res) => {
   res.json(allPizzaEntries);
 });
 
-app.get("/api/v1/pizzaStats/:user", async (req, res) => {
+app.get("rest/api/v1/pizzaStats/:user", async (req, res) => {
   const requestedName = req.params["user"];
   dbx
     .fetchPizzaEntriesByName(db, requestedName)
@@ -66,7 +66,7 @@ app.get("/api/v1/pizzaStats/:user", async (req, res) => {
     });
 });
 
-app.post("/api/v1/pizzaStats", async (req, res) => {
+app.post("/rest/api/v1/pizzaStats", async (req, res) => {
   const apiKey = extractAPIKey(req);
 
   if (!apiKey) {
@@ -85,7 +85,7 @@ app.post("/api/v1/pizzaStats", async (req, res) => {
     });
 });
 
-app.delete("/api/v1/pizzaStats/:id", async (req, res) => {
+app.delete("/rest/api/v1/pizzaStats/:id", async (req, res) => {
   const apiKey = extractAPIKey(req);
 
   if (!apiKey) {
