@@ -31,19 +31,31 @@
   </head>
   <body>
     <div class="container">
-      <h1>Pizza Tracker</h1>
+      <h1>🍕Pizza Tracker🍕</h1>
     </div>
     <div class="container">
       <h2>Aktueller Stand</h2>
+      <div class="outer-container">
+        <div class="container bigNumberDisplay">
+            <p><span class="schaschColor">Schaschs</span> Pizzakonsum</p>
+            <p class="bigNum" id="schaschCount">2</p>
+            <p>Letzte Pizza vor <span id="schaschTime">8</span> Tagen</p>
+        </div>
+        <div class="container bigNumberDisplay">
+            <p><span class="maniColor">Manis</span> Pizzakonsum</p>
+            <p class="bigNum" id="maniCount">4</p>
+            <p>Letzte Pizza vor <span id="maniTime">8</span> Tagen</p>
+        </div>
+      </div>
       <canvas id="lineChartMain"></canvas>
     </div>
     <div class="outer-container container">
       <div class="container">
-        <h2>Pizzasorten von Schasch</h2>
+        <h2>Pizzasorten von <span class="schaschColor">Schasch</span></h2>
         <canvas id="pieChart1"></canvas>
       </div>
       <div class="container">
-        <h2>Pizzasorten von Mani</h2>
+        <h2>Pizzasorten von <span class="maniColor">Mani</span></h2>
         <canvas id="pieChart2"></canvas>
       </div>
     </div>
@@ -90,5 +102,30 @@
         <button type="submit">Absenden</button>
       </form>
     </div>
+
+    <div class="container">
+        <h1>Pizzaeintrag löschen</h1>
+        <form id="pizzaDeletionForm">
+          <label for="apikey">API Key:</label>
+          <input
+            type="password"
+            name="apikey"
+            id="apikey"
+            placeholder="API key hier eingeben..."
+            required
+          />
+
+          <label for="entryID">ID des Eintrags:</label>
+          <input
+            type="number"
+            name="entryID"
+            id="entryID"
+            placeholder="ID hier eingeben..."
+            required
+          />
+    
+          <button type="submit">Absenden</button>
+        </form>
+      </div>
   </body>
 </html>

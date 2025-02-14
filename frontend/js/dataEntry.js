@@ -35,3 +35,34 @@ document
         alert("An error occurred: " + error.message);
       });
   });
+
+  document
+  .getElementById("pizzaDeletionForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const idToDel = formData.get("entryID");
+    const apiKey = formData.get("apikey");
+
+    fetch(`http://localhost:3000/api/v1/pizzaStats/${idToDel}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred: " + error.message);
+      });
+  });

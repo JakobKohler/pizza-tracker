@@ -34,6 +34,20 @@ function getDatesFromStartToToday() {
   return dates;
 }
 
+const pizzaInfo = (tooltipItem) => {
+  const dataPoint = tooltipItem.raw;
+  let tooltipText = '';
+  if(dataPoint.pizzaList.length > 1){
+    ids = dataPoint.pizzaList.map(entry => entry.id)
+    tooltipText = `IDs: ${ids.join(', ')}, Mehrere Pizzas`
+  }else if(dataPoint.pizzaList.length <= 0){
+    tooltipText = `Keine Pizza`
+  }else{
+    tooltipText = `ID: ${dataPoint.pizzaList[0].id}, ${dataPoint.pizzaList[0].variety}`;
+  }
+  return `${tooltipText}`;
+}
+
 function calcAccumulations(dataset, labels) {
   const sortedDataset = dataset.sort(
     (a, b) => new Date(a.date) - new Date(b.date)
@@ -46,7 +60,7 @@ function calcAccumulations(dataset, labels) {
     let currentEntry = sortedDataset[dataSetIndex];
     if (currentEntry && currentEntry["date"] == labels[i]) {
       totalCounter++;
-      let dayEntry = { accuCount: totalCounter, pizzas: [currentEntry] };
+      let dayEntry = {timestamp: labels[i], accuCount: totalCounter, pizzas: [currentEntry] };
       while (
         dataSetIndex < sortedDataset.length - 1 &&
         sortedDataset[dataSetIndex + 1].date == labels[i]
@@ -60,7 +74,7 @@ function calcAccumulations(dataset, labels) {
       mappedData.push(dayEntry);
       dataSetIndex++;
     } else {
-      mappedData.push({ accuCount: totalCounter, pizzas: [] });
+      mappedData.push({timestamp: labels[i], accuCount: totalCounter, pizzas: [] });
     }
   }
   return mappedData;
@@ -76,12 +90,12 @@ function createLineChart(set1, set2) {
     datasets: [
       {
         label: "Schasch",
-        data: set1Accu.map((entry) => entry["accuCount"]),
+        data: set1Accu.map((entry) => ({ x: entry.timestamp, y: entry.accuCount, pizzaList: entry.pizzas })),
         borderColor: CHART_COLORS.red,
       },
       {
         label: "Mani",
-        data: set2Accu.map((entry) => entry["accuCount"]),
+        data: set2Accu.map((entry) => ({ x: entry.timestamp, y: entry.accuCount, pizzaList: entry.pizzas })),
         borderColor: CHART_COLORS.blue,
       },
     ],
@@ -92,6 +106,11 @@ function createLineChart(set1, set2) {
     options: {
       responsive: true,
       plugins: {
+        tooltip: {
+          callbacks: {
+            label: pizzaInfo,
+          }
+        },
         legend: {
           position: "top",
         },
@@ -121,7 +140,7 @@ async function createPieChart(dataset, ctx) {
     datasets: [
       {
         data: values,
-        backgroundColor: Object.values(CHART_COLORS),
+        backgroundColor: Object.values(CHART_COLORS).splice(2),
       },
     ],
   };
@@ -146,6 +165,32 @@ async function createPieChart(dataset, ctx) {
   new Chart(ctx, config);
 }
 
+function getDiffToToday(dataset){
+  if(dataset.length <= 0) return '-'
+
+  const mostRecent = dataset.reduce((latest, obj) => 
+    new Date(obj.date) > new Date(latest.date) ? obj : latest
+  );
+
+  const today = new Date();
+  const recentDate = new Date(mostRecent.date);
+  const diffInDays = Math.floor((today - recentDate) / (1000 * 60 * 60 * 24));
+  return diffInDays
+}
+
+function adjustDOM(schaschData, maniData){
+  const schaschCountField = document.getElementById("schaschCount");
+  const maniCountField = document.getElementById("maniCount");
+  const schaschTimeField = document.getElementById("schaschTime");
+  const maniTimeField = document.getElementById("maniTime");
+
+  schaschCountField.innerText = schaschData.length;
+  maniCountField.innerText = maniData.length;
+
+  schaschTimeField.innerText = getDiffToToday(schaschData);
+  maniTimeField.innerText = getDiffToToday(maniData);
+}
+
 async function fetchData() {
   try {
     let response = await fetch(
@@ -158,9 +203,11 @@ async function fetchData() {
     createLineChart(schaschData, maniData);
     createPieChart(schaschData, ctxPie1);
     createPieChart(maniData, ctxPie2);
+    adjustDOM(schaschData, maniData);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
 
 fetchData();
+
