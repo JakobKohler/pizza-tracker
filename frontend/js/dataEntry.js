@@ -31,6 +31,7 @@ document
       })
       .then((data) => {
         console.log("Success:", data);
+        location.reload();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -62,6 +63,7 @@ document
       })
       .then((data) => {
         console.log("Success:", data);
+        location.reload();
       })
       .catch((error) => {
         console.error("Error:", error);
