@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Running createUsers.js..."
-node createUsers.js mani schasch master
+node utils/createUsers.js mani schasch master
 
 if [ $? -eq 0 ]; then
   echo "Database initialized successfully. Starting the server..."
