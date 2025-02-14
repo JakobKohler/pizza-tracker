@@ -7,6 +7,10 @@ RUN npm install --only=production
 
 COPY . .
 
+COPY start.sh /app/start.sh
+
+RUN chmod +x /app/start.sh
+
 EXPOSE 5000
 
-CMD ["node", "server.js"]
+CMD ["/bin/sh", "/app/start.sh"]
